@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class Persona {
+    private:
+        string nombre;
+        int edad;
+        float altura;
+    public:
+        Persona(string nombre, int edad, float altura)
+        : nombre(nombre), edad(edad), altura(altura) {}
+        string getNombre() const { return nombre; }
+        float getEdad() const { return edad; }
+        float getAltura() const { return altura; }
+};
+int main() {
+    vector<Persona> personas;
+    string nombre;
+    int edad;
+    float altura;
+    int numero_personas;
+    cout << "Ingrese el numero de personas: ";
+    cin >> numero_personas;
+    for (int i = 0; i < numero_personas; i++) {
+        cout << "Ingrese el nombre de la persona numero " << i+1 << ": ";
+        cin >> nombre;
+        cout << "Ingrese la edad de la persona: ";
+        cin >> edad;
+        cout << "Ingrese la altura de la persona(cm):  ";
+        cin >> altura;
+        personas.push_back(Persona(nombre, edad, altura));
+        cout << endl;
+    }
+    for (int k = 1; k < personas.size(); k++) {
+        Persona actual = personas[k];
+        int auxiliar = k - 1;
+        while (auxiliar >= 0 && personas[auxiliar].getEdad() > actual.getEdad()) {
+            personas[auxiliar + 1] = personas[auxiliar];
+            auxiliar--;
+        }
+        personas[auxiliar + 1] = actual;
+    }
+    cout << endl << "Datos de los de las personas en orden de edad ascendente:";
+    for (const auto& Persona : personas) {
+        cout << endl << "Nombre: " << Persona.getNombre() << endl;
+        cout << "Edad: " << Persona.getEdad() << " años" << endl;
+        cout << "Altura: " << Persona.getAltura() << " cm" << endl << endl;
+    }
+    return 0;
+}
