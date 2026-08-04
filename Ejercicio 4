@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class CuentaBancaria {
+    private:
+        int numcuenta;
+        string nombre;
+        float saldo;
+    public:
+        CuentaBancaria(int numcuenta, string nombre, float saldo)
+        : numcuenta(numcuenta), nombre(nombre), saldo(saldo) {}
+        int getNumCuenta() const { return numcuenta; }
+        string getNombre() const { return nombre; }
+        float getSaldo() const { return saldo; }
+};
+int main() {
+    vector<CuentaBancaria> cuenta;
+    int numcuenta;
+    string nombre;
+    float saldo;
+    int numeros_de_cuentas;
+    cout << "Ingrese el número de las cuentas: ";
+    cin >> numeros_de_cuentas;
+    for (int i = 0; i < numeros_de_cuentas; i++) {
+        cout << "Ingrese numero de cuenta: " << i+1 << ": ";
+        cin >> numcuenta;
+        cout << "Ingrese el nombre titular de la cuenta: ";
+        cin >> nombre;
+        cout << "Ingrese el saldo de la cuenta: ";
+        cin >> saldo;
+        cuenta.push_back(CuentaBancaria(numcuenta, nombre, saldo));
+        cout << endl;
+    }
+    cout << endl << "Datos de las cuentas:" << endl;
+    for (const auto& CuentaBancaria : cuenta) {
+        cout << "Numero de cuenta: " << cuenta.getNumCuenta() << endl;
+        cout << "Nombre titular de la cuenta: " << cuenta.getNombre() << endl;
+        cout << "Saldo de la cuenta: " << cuenta.getSaldo() << " pesos" << endl;
+        cout << endl;
+    }
+    return 0;
+}
