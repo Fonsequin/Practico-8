@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class Persona {
+    private:
+        string nombre;
+        int edad;
+        string altura;
+    public:
+        Persona(string nombre, int edad, string altura)
+        : nombre(nombre), edad(edad), altura(altura) {}
+        string getNombre() const { return nombre; }
+        float getEdad() const { return edad; }
+        string getAltura() const { return altura; }
+};
+int main() {
+    vector<Persona> personas;
+    string nombre;
+    int edad;
+    string altura;
+    int numero_personas;
+    cout << "Ingrese el numero de libros: ";
+    cin >> numero_personas;
+    for (int i = 0; i < numero_personas; i++) {
+        cout << "Ingrese el titulo del libro " << i+1 << ": ";
+        getline(cin, nombre);
+        getline(cin, nombre);
+        cout << "Ingrese el nombre del autor: ";
+        getline(cin, altura);
+        cout << "Ingrese el año de lanzamiento:  ";
+        cin >> edad;
+        personas.push_back(Persona(nombre, edad, altura));
+    }
+    for (int k = 1; k < personas.size(); k++) {
+        Persona actual = personas[k];
+        int auxiliar = k - 1;
+        while (auxiliar >= 0 && personas[auxiliar].getEdad() > actual.getEdad()) {
+            personas[auxiliar + 1] = personas[auxiliar];
+            auxiliar--;
+        }
+        personas[auxiliar + 1] = actual;
+    }
+    cout << endl << "Datos en orden de año de menor a mayor:";
+    for (const auto& Persona : personas) {
+        cout << endl << "Titulo: " << Persona.getNombre() << endl;
+        cout << "Autor: " << Persona.getAltura() << endl;
+        cout << "Año: " << Persona.getEdad() << endl << endl;
+    }
